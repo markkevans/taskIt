@@ -36,13 +36,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    @IBAction func addButtonTapped(sender: UIBarButtonItem) {
+        self.performSegueWithIdentifier("showTaskAdd", sender: self)
+        
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showTaskDetail" {
             let detailVC: TaskDetailViewController = segue.destinationViewController as TaskDetailViewController
             let indexPath = self.tableView.indexPathForSelectedRow()
             let thisTask = taskArray[indexPath!.row]
             detailVC.detailTaskModel = thisTask
+        } else if segue.identifier == "showTaskAdd" {
+            let addTaskVC: AddTaskViewController = segue.destinationViewController as AddTaskViewController
+            addTaskVC.mainVC = self
+
         }
     }
 
